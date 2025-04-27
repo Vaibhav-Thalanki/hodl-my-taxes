@@ -152,6 +152,8 @@ Remix IDE
 ![Smart Contract Overview](https://github.com/anandms101/viem-dapp/blob/9384958f20e6653a2587f177dbeea3b2b576559f/HODLTaxes.png "Smart Contract Overview")
 
 ## Walkthrough Video
+https://www.youtube.com/playlist?list=PLfMw4CQfRq-TtLhGnzFL5ARylWtesBXzl
+
 ## Block Explorer Link
 
 View Block explorer link for deployed smart contract on Asset Hub:  
@@ -168,4 +170,3 @@ This project is open-source under the MIT License.
 - [Vaibhav Thalanki](https://github.com/Vaibhav-Thalanki)
 - [Anand Singh](https://github.com/anandms101)
 - [Chaitanya Agarwal](https://github.com/Chaim3ra)
-- [Rishabh Kumar](https://github.com/k-rishabh)
