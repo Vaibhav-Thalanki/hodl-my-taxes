@@ -124,6 +124,9 @@ https://github.com/anandms101/viem-dapp/blob/717f561d3c3a52069f6845b2cc89d6451f6
 ## Demo
 ## Screenshots
 
+![Remix Deployment to Polkadot Westend Asset Hub](https://github.com/user-attachments/assets/34a939bb-8941-4d4c-a424-08325ada2ff7)
+
+
 *(Screenshots coming soon)*
 ## Smart Contract & Application Overview
 ![Smart Contract Overview](https://github.com/anandms101/viem-dapp/blob/9384958f20e6653a2587f177dbeea3b2b576559f/HODLTaxes.png "Smart Contract Overview")
@@ -131,8 +134,9 @@ https://github.com/anandms101/viem-dapp/blob/717f561d3c3a52069f6845b2cc89d6451f6
 ## Walkthrough Video
 ## Block Explorer Link
 
-View deployed contract on Asset Hub (Westend Testnet):  
-[Asset Hub Explorer](https://assethub-westend.subscan.io/account/0xd5621D4D3B08211E6310787Db5A2E1C0CDf544cf)
+View Block explorer link for deployed smart contract on Asset Hub:  
+[Asset Hub Explorer](https://assethub-westend.subscan.io/account/0x5991E37727267faFA9f635826e8246F41b3DEd69)
+
 
 ## License
 
