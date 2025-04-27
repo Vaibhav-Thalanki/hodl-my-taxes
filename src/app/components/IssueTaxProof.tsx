@@ -1,41 +1,26 @@
-// src/app/components/IssueTaxProof.tsx
 'use client';
 
 import React, { useState } from 'react';
 import { getGameTaxSigner } from '@/utils/contract';
-import { publicClient } from '@/utils/viem';
+import { v4 as uuidv4 }     from 'uuid';
 
 export default function IssueTaxProof() {
-  const [busy, setBusy] = useState(false);
-  const [proofHash, setProofHash] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy]       = useState(false);
+  const [proofKey, setProofKey] = useState<string | null>(null);
+  const [error, setError]     = useState<string | null>(null);
 
-  const handleIssue = async () => {
+  const handleProofOnly = async () => {
     setBusy(true);
     setError(null);
+
     try {
       const ctr = await getGameTaxSigner();
+      const key = uuidv4();                     // unique proof key
 
-      // 1) Do the “record” call
-      const txHash1 = await ctr.write.recordTransaction({
-        args: [
-          0,                   // Income=0, Expense=1, CapitalGain=2
-          BigInt(123),         // example itemId
-          BigInt(456)          // example price
-        ]
-      });
+      // <-- This is the ONLY call now:
+      await ctr.write.issueTaxProof({ args: [key] });
 
-      // 2) Wait for it to be mined
-      const receipt1 = await publicClient.waitForTransactionReceipt({ hash: txHash1 });
-      const realTxHash = receipt1.transactionHash;
-      console.log('Recorded tx:', realTxHash);
-
-      // 3) Issue proof using that same hash
-      const txHash2 = await ctr.write.issueTaxProof({ args: [realTxHash] });
-
-      // 4) Wait for that proof-event tx too (optional)
-      await publicClient.waitForTransactionReceipt({ hash: txHash2 });
-      setProofHash(realTxHash);
+      setProofKey(key);
     } catch (e: any) {
       console.error('Proof issuance error:', e);
       setError(e.message || 'Something went wrong');
@@ -46,19 +31,17 @@ export default function IssueTaxProof() {
 
   return (
     <div className="p-4 border rounded space-y-2">
-      <h2 className="text-lg font-bold">🔖 Record & Issue Proof</h2>
-
+      <h2 className="text-lg font-bold">🔖 Issue Proof Only</h2>
       <button
-        onClick={handleIssue}
+        onClick={handleProofOnly}
         disabled={busy}
         className="bg-purple-500 text-white px-3 py-1 rounded"
       >
-        {busy ? 'Working…' : 'Record & Issue Proof'}
+        {busy ? 'Working…' : 'Issue Proof'}
       </button>
-
-      {proofHash && (
+      {proofKey && (
         <p className="text-green-400">
-          ✅ Proof issued for tx <code>{proofHash}</code>
+          ✅ Proof key: <code>{proofKey}</code>
         </p>
       )}
       {error && <p className="text-red-500">{error}</p>}

@@ -5,7 +5,6 @@ import WalletConnect from './components/WalletConnect';
 import RecordTransaction from './components/RecordTransaction';
 import TaxReport from './components/TaxReport';
 import IssueTaxProof from './components/IssueTaxProof';
-import FileTax from './components/FileTax';    // ← NEW
 import IRSView from './components/IRSView';
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
 
   return (
     <main className="p-8">
-      <h1 className="text-3xl font-bold mb-4">🎮 Game-Tax Assistant</h1>
+      <h1 className="text-3xl font-bold mb-4">🧾 HODL My Taxes</h1>
 
       {/* Mode toggle */}
       <div className="mb-6 space-x-2">
@@ -42,7 +41,7 @@ export default function Home() {
         <>
           <WalletConnect onConnect={() => { }} />
 
-          {/* 1. Record tx */}
+          {/* 1. Record transaction */}
           <RecordTransaction />
 
           {/* 2. Visualize & download CSV */}
@@ -50,10 +49,6 @@ export default function Home() {
 
           {/* 3. Issue proof of filing */}
           <IssueTaxProof />
-
-          {/* 4. New “File Tax” button & deduction display */}
-          <FileTax />  {/* ← HERE */}
-
         </>
       ) : (
         <IRSView />
