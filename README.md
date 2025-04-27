@@ -107,7 +107,7 @@ All data is secured and recorded through a custom smart contract on Polkadot Ass
 | `Asset Hub` | Hosting EVM-compatible Smart Contracts |
 | `viem` | Interacting with smart contracts on Asset Hub |
 | `Remix IDE` | Smart Contact writing and deployment to Asset Hub |
-| `React.js` | Build the user interface (User View + IRS View) |
+| `Next.js` | Build the user interface (User View + IRS View) |
 | `csv-writer` | Generate CSV files in the browser |
 
 ---
@@ -119,7 +119,7 @@ All data is secured and recorded through a custom smart contract on Polkadot Ass
 [View our Canva Presentation](https://www.canva.com/design/DAGlxei1P5Q/pz5BQIsgbs7lS7GoepVVeA/edit?utm_content=DAGlxei1P5Q&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Custom Smart Contract
-https://github.com/anandms101/viem-dapp/blob/717f561d3c3a52069f6845b2cc89d6451f62976e/remixContract/TaxBot.sol#L1-L68
+https://github.com/anandms101/viem-dapp/blob/f09a3fe1d53efd9ad85903d6bd81646d189d5d2c/remixContract/TaxBot.sol#L1-L107
 
 ## Demo
 ## Screenshots
