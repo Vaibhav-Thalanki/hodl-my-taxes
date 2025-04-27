@@ -16,7 +16,7 @@
             {
                 "indexed": false,
                 "internalType": "string",
-                "name": "metadata",
+                "name": "proofKey",
                 "type": "string"
             }
         ],
@@ -59,6 +59,25 @@
         ],
         "name": "TransactionRecorded",
         "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "proofKey",
+                "type": "string"
+            }
+        ],
+        "name": "getProofOwner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "inputs": [
@@ -154,7 +173,7 @@
         "inputs": [
             {
                 "internalType": "string",
-                "name": "metadata",
+                "name": "proofKey",
                 "type": "string"
             }
         ],
@@ -179,9 +198,14 @@
                 "internalType": "uint256",
                 "name": "price",
                 "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "proofKey",
+                "type": "string"
             }
         ],
-        "name": "recordTransaction",
+        "name": "recordAndProof",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

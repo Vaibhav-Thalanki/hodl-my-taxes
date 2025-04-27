@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getGameTaxContract } from '@/utils/contract';
+import ProofLookup from './ProofLookup';
 
 export default function IRSView() {
     const [users, setUsers] = useState<string[]>([]);
@@ -62,6 +63,9 @@ export default function IRSView() {
                     </div>
                 ))
             )}
+
+            <hr className="my-4" />
+            <ProofLookup />
         </div>
     );
 }

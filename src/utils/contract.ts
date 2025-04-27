@@ -3,13 +3,7 @@ import { getContract } from "viem";
 import { publicClient, getWalletClient } from "./viem";
 import GameTaxABI from "../../abis/GameTax.json";
 
-// Read the address from env — this must match what you set in .env
-const address = process.env.NEXT_PUBLIC_GAME_TAX_ADDRESS;
-if (!address) {
-  throw new Error("Missing NEXT_PUBLIC_GAME_TAX_ADDRESS in environment");
-}
-
-export const GAME_TAX_ADDRESS = address;
+export const GAME_TAX_ADDRESS = "0x5991E37727267faFA9f635826e8246F41b3DEd69";
 export const GAME_TAX_ABI = GameTaxABI;
 
 export function getGameTaxContract() {

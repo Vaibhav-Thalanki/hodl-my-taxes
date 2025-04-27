@@ -1,37 +1,50 @@
 'use client';
 
-import React, { useState }    from 'react';
-import { getGameTaxSigner }   from '../../utils/contract';
+import React, { useState } from 'react';
+import { getGameTaxSigner } from '@/utils/contract';
+import { v4 as uuidv4 }     from 'uuid';
 
 export default function IssueTaxProof() {
-  const [meta, setMeta] = useState('');
+  const [busy, setBusy]       = useState(false);
+  const [proofKey, setProofKey] = useState<string | null>(null);
+  const [error, setError]     = useState<string | null>(null);
 
-  const issueProof = async () => {
-    if (!meta) {
-      alert('Please enter some metadata (e.g. a report ID)');
-      return;
+  const handleProofOnly = async () => {
+    setBusy(true);
+    setError(null);
+
+    try {
+      const ctr = await getGameTaxSigner();
+      const key = uuidv4();                     // unique proof key
+
+      // <-- This is the ONLY call now:
+      await ctr.write.issueTaxProof({ args: [key] });
+
+      setProofKey(key);
+    } catch (e: any) {
+      console.error('Proof issuance error:', e);
+      setError(e.message || 'Something went wrong');
+    } finally {
+      setBusy(false);
     }
-    const ctr = await getGameTaxSigner();
-    await ctr.write.issueTaxProof({ args: [meta] });
-    alert('✅ Tax-proof event emitted on-chain');
   };
 
   return (
-    <div className="p-4 border rounded">
-      <h2 className="font-bold mb-2">🔖 Issue Proof-of-Filing</h2>
-      <input
-        type="text"
-        placeholder="Proof metadata"
-        value={meta}
-        onChange={e => setMeta(e.target.value)}
-        className="border p-1 rounded mr-2"
-      />
+    <div className="p-4 border rounded space-y-2">
+      <h2 className="text-lg font-bold">🔖 Issue Proof Only</h2>
       <button
-        onClick={issueProof}
+        onClick={handleProofOnly}
+        disabled={busy}
         className="bg-purple-500 text-white px-3 py-1 rounded"
       >
-        Issue Proof
+        {busy ? 'Working…' : 'Issue Proof'}
       </button>
+      {proofKey && (
+        <p className="text-green-400">
+          ✅ Proof key: <code>{proofKey}</code>
+        </p>
+      )}
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 }
