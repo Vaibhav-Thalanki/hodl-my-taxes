@@ -125,11 +125,24 @@ https://github.com/anandms101/viem-dapp/blob/f09a3fe1d53efd9ad85903d6bd81646d189
 ## Demo
 [Live Demo](https://hodl-my-taxes.vercel.app/)
 
+Demo video:
+
+https://github.com/anandms101/hodl-my-taxes/blob/de7b97d6fed216165732220fba5b4345e23623c6/HODLmyTaxesDemoVideo.mov
+
+
 ## Screenshots
 
+
+
+![User View](https://raw.githubusercontent.com/anandms101/hodl-my-taxes/refs/heads/documentation/user_view.png)
+
+User View
+
+![IRS View](https://raw.githubusercontent.com/anandms101/hodl-my-taxes/refs/heads/documentation/irs_view.png)
+IRS View
+
 ![Remix Deployment to Polkadot Westend Asset Hub](https://github.com/user-attachments/assets/34a939bb-8941-4d4c-a424-08325ada2ff7)
-
-
+Remix IDE
 
 ## Smart Contract & Application Overview
 ![Smart Contract Overview](https://github.com/anandms101/viem-dapp/blob/9384958f20e6653a2587f177dbeea3b2b576559f/HODLTaxes.png "Smart Contract Overview")
