@@ -106,6 +106,7 @@ All data is secured and recorded through a custom smart contract on Polkadot Ass
 |:---|:---|
 | `Asset Hub` | Hosting EVM-compatible Smart Contracts |
 | `viem` | Interacting with smart contracts on Asset Hub |
+| `Remix IDE` | Smart Contact writing and deployment to Asset Hub |
 | `React.js` | Build the user interface (User View + IRS View) |
 | `csv-writer` | Generate CSV files in the browser |
 
@@ -125,6 +126,8 @@ https://github.com/anandms101/viem-dapp/blob/717f561d3c3a52069f6845b2cc89d6451f6
 
 *(Screenshots coming soon)*
 ## Smart Contract & Application Overview
+![Smart Contract Overview](https://github.com/anandms101/viem-dapp/blob/9384958f20e6653a2587f177dbeea3b2b576559f/HODLTaxes.png "Smart Contract Overview")
+
 ## Walkthrough Video
 ## Block Explorer Link
 
