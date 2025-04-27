@@ -1,25 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import WalletConnect from "./components/WalletConnect";
-import ReadContract from "./components/ReadContract";
-import WriteContract from "./components/WriteContract";
+import WalletConnect from './components/WalletConnect';
+import RecordTransaction from './components/RecordTransaction';
+import TaxReport from './components/TaxReport';
+import IssueTaxProof from './components/IssueTaxProof';
+import React, { useState } from 'react';
 
 export default function Home() {
+  // lift account state here
   const [account, setAccount] = useState<string | null>(null);
-
-  const handleConnect = (connectedAccount: string) => {
-    setAccount(connectedAccount);
-  };
-
   return (
-    <section className="min-h-screen bg-white text-black flex flex-col justify-center items-center gap-4 py-10">
-      <h1 className="text-2xl font-semibold text-center">
-        Viem dApp - Asset Hub Smart Contracts
-      </h1>
-      <WalletConnect onConnect={handleConnect} />
-      <ReadContract />
-      <WriteContract account={account} />
-    </section>
+    <main className="p-8 space-y-6">
+      <h1 className="text-3xl font-bold">🎮 Game-Tax Assistant</h1>
+
+      {/* pass onConnect so WalletConnect can notify us */}
+      <WalletConnect onConnect={setAccount} />
+      <RecordTransaction />
+      <TaxReport />
+      <IssueTaxProof />
+    </main>
   );
 }

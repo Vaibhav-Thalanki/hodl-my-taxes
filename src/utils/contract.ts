@@ -1,25 +1,24 @@
+// utils/contract.ts
 import { getContract } from "viem";
 import { publicClient, getWalletClient } from "./viem";
-import StorageABI from "../../abis/Storage.json";
+import GameTaxABI from "../../abis/GameTax.json";
 
-export const CONTRACT_ADDRESS = "0xabBd46Ef74b88E8B1CDa49BeFb5057710443Fd29";
-export const CONTRACT_ABI = StorageABI;
+export const GAME_TAX_ADDRESS = "0x4626820cdcb75eBD69870E18a2932947C5D6E50C";
+export const GAME_TAX_ABI = GameTaxABI;
 
-// Create a function to get a contract instance for reading
-export const getContractInstance = () => {
+export function getGameTaxContract() {
   return getContract({
-    address: CONTRACT_ADDRESS,
-    abi: CONTRACT_ABI,
+    address: GAME_TAX_ADDRESS,
+    abi: GAME_TAX_ABI,
     client: publicClient,
   });
-};
+}
 
-// Create a function to get a contract instance with a signer for writing
-export const getSignedContract = async () => {
+export async function getGameTaxSigner() {
   const walletClient = await getWalletClient();
   return getContract({
-    address: CONTRACT_ADDRESS,
-    abi: CONTRACT_ABI,
+    address: GAME_TAX_ADDRESS,
+    abi: GAME_TAX_ABI,
     client: walletClient,
   });
-};
+}
