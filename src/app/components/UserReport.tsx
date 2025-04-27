@@ -12,13 +12,26 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+/**
+ * Props for the UserReport component
+ */
 interface UserReportProps {
+    /** Ethereum address of the user */
     address: string;
 }
 
+/**
+ * Component that generates and downloads a CSV report of user's game transactions
+ * @param {UserReportProps} props - Component props
+ * @returns {JSX.Element} Card component with download button
+ */
 export default function UserReport({ address }: UserReportProps) {
     const [busy, setBusy] = useState(false);
 
+    /**
+     * Generates and triggers download of CSV report containing user's transaction history
+     * The CSV includes category, item ID, price, and timestamp for each transaction
+     */
     const generateCSV = async () => {
         setBusy(true);
         try {

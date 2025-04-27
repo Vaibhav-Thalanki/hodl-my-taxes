@@ -12,26 +12,32 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+/**
+ * TaxReport Component
+ * Generates and downloads a CSV report of game transactions for tax purposes.
+ * The report includes transaction categories, item IDs, prices, and timestamps.
+ */
 export default function TaxReport() {
     const [busy, setBusy] = useState(false);
 
+    /**
+     * Generates and downloads a CSV file containing the user's transaction history.
+     * The CSV includes columns for Category, ItemID, Price, and Timestamp.
+     * File is named as tax_report_[userAddress].csv
+     */
     const generateCSV = async () => {
         setBusy(true);
         try {
-            // 1. Get your wallet/account
             const walletClient = await getWalletClient();
             const account = walletClient.account.address;
 
-            // 2. Grab the contract instance
             const contract = getGameTaxContract();
 
-            // 3. Query how many txs you have
             const countBig = await contract.read.getTransactionCount({
                 args: [account],
             });
             const count = Number(countBig);
 
-            // 4. Build rows: header + each transaction
             const rows: string[][] = [
                 ['Category', 'ItemID', 'Price', 'Timestamp'],
             ];
@@ -47,10 +53,8 @@ export default function TaxReport() {
                 ]);
             }
 
-            // 5. Convert to CSV text
             const csvText = rows.map(r => r.join(',')).join('\n');
 
-            // 6. Trigger download
             const blob = new Blob([csvText], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');

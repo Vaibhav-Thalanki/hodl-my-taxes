@@ -11,10 +11,21 @@ import {
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
+/**
+ * Props for the WalletConnect component
+ * @interface WalletConnectProps
+ * @property {function} onConnect - Callback function that receives the connected account address
+ */
 interface WalletConnectProps {
     onConnect: (account: string) => void;
 }
 
+/**
+ * WalletConnect component handles wallet connection, network switching, and wallet state management
+ * @component
+ * @param {WalletConnectProps} props - Component props
+ * @returns {JSX.Element} Rendered component
+ */
 const WalletConnect: React.FC<WalletConnectProps> = ({ onConnect }) => {
     const [account, setAccount] = useState<string | null>(null);
     const [chainId, setChainId] = useState<number | null>(null);
@@ -62,6 +73,11 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ onConnect }) => {
         };
     }, [onConnect]);
 
+    /**
+     * Handles wallet connection and ensures correct network
+     * @async
+     * @function connectWallet
+     */
     const connectWallet = async () => {
         if (typeof window === 'undefined' || !window.ethereum) {
             setError('MetaMask not detected! Please install MetaMask.');
@@ -87,6 +103,11 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ onConnect }) => {
         }
     };
 
+    /**
+     * Switches the network to Asset Hub or adds it if not present
+     * @async
+     * @function switchNetwork
+     */
     const switchNetwork = async () => {
         try {
             await window.ethereum.request({
@@ -114,6 +135,10 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ onConnect }) => {
         }
     };
 
+    /**
+     * Disconnects the wallet by clearing the account state
+     * @function disconnectWallet
+     */
     const disconnectWallet = () => {
         setAccount(null);
     };
