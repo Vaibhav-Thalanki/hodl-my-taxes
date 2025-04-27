@@ -11,6 +11,9 @@ contract GameTax {
     mapping(address => bool) private _seen;
     address public taxAuthority;
 
+    // New: map proof metadata → who issued it
+    mapping(string => address) private _proofOwners;
+
     event TransactionRecorded(
         address indexed who,
         Category category,
@@ -63,6 +66,16 @@ contract GameTax {
 
     /// @notice “mint” your proof by emitting this event
     function issueTaxProof(string calldata metadata) external {
+        _proofOwners[metadata] = msg.sender;
         emit TaxProofIssued(msg.sender, metadata);
+    }
+
+    /// @notice Given a proof string, who issued it?
+    function getProofOwner(string calldata metadata)
+        external
+        view
+        returns (address)
+    {
+        return _proofOwners[metadata];
     }
 }

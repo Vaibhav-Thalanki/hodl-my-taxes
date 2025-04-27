@@ -69,6 +69,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "metadata",
+						"type": "string"
+					}
+				],
+				"name": "getProofOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "who",
 						"type": "address"
@@ -214,6 +233,9 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {
+				"getProofOwner(string)": {
+					"notice": "Given a proof string, who issued it?"
+				},
 				"getUser(uint256)": {
 					"notice": "Fetch the nᵗʰ user’s address"
 				},
@@ -254,11 +276,11 @@
 	},
 	"sources": {
 		"contracts/TaxBot.sol": {
-			"keccak256": "0x03638c551bc76ff7c50c8fdec363cf11c76dec92f2ae10855a4463bf48338e4a",
+			"keccak256": "0xacc4ec561309344411a54438d037d3505a5633759e25618251e370f7445f8159",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a48cd01fa3afae409cb7edb494c547273bf65bfcf6e075de1ac1d728b11c763a",
-				"dweb:/ipfs/QmbcBRWNJmfjoAjTMceZ9xDDB2dyBymrdCV8dbhqRjiB5D"
+				"bzz-raw://d1f7e48ca2dd4a7736ea446db6cb500bbcfccd502520be7cff61ee6e653a0c09",
+				"dweb:/ipfs/QmX2pbXURnSWKnSStJ9f6UYrG8C7iuc6nnR6KYoSWyracu"
 			]
 		}
 	},
