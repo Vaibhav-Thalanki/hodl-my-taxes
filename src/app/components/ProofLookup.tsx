@@ -1,8 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
-import { getGameTaxContract } from '@/utils/contract';
 import Link from 'next/link';
+import { getGameTaxContract } from '@/utils/contract';
+
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardContent
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 export default function ProofLookup() {
     const [proof, setProof] = useState('');
@@ -13,6 +23,7 @@ export default function ProofLookup() {
     const lookup = async () => {
         setBusy(true);
         setError(null);
+        setOwner(null);
         try {
             const ctr = getGameTaxContract();
             const who = await ctr.read.getProofOwner({ args: [proof] });
@@ -21,7 +32,7 @@ export default function ProofLookup() {
             } else {
                 setOwner(who);
             }
-        } catch (e: any) {
+        } catch (e) {
             setError('Lookup failed');
         } finally {
             setBusy(false);
@@ -29,36 +40,42 @@ export default function ProofLookup() {
     };
 
     return (
-        <div className="p-4 border rounded space-y-2">
-            <h2 className="text-lg font-bold">🔑 Lookup by Proof Code</h2>
-            <input
-                type="text"
-                value={proof}
-                onChange={(e) => setProof(e.target.value)}
-                placeholder="Enter proof metadata"
-                className="border p-1 rounded w-full"
-            />
-            <button
-                onClick={lookup}
-                disabled={busy || !proof}
-                className="bg-indigo-500 text-white px-3 py-1 rounded"
-            >
-                {busy ? 'Searching…' : 'Find User'}
-            </button>
-
-            {owner && (
-                <p>
-                    Found user:{' '}
-                    <Link
-                        href={`/report/${owner}`}
-                        className="text-pink-400 underline"
+        <Card>
+            <CardHeader>
+                <CardTitle>🔑 Lookup by Proof Code</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                {/* input + button */}
+                <div className="flex space-x-2">
+                    <Input
+                        placeholder="Enter proof metadata"
+                        value={proof}
+                        onChange={(e) => setProof(e.target.value)}
+                        className="flex-1"
+                        disabled={busy}
+                    />
+                    <Button
+                        onClick={lookup}
+                        disabled={busy || !proof}
+                        variant="default"
                     >
-                        {owner}
-                    </Link>
-                </p>
-            )}
+                        {busy ? 'Searching…' : 'Find User'}
+                    </Button>
+                </div>
 
-            {error && <p className="text-red-500">{error}</p>}
-        </div>
+                <Separator />
+
+                {/* Results */}
+                {owner && (
+                    <p className="flex items-center space-x-2">
+                        <span>Found user:</span>
+                        <Button asChild variant="link" size="sm">
+                            <Link href={`/report/${owner}`}>{owner}</Link>
+                        </Button>
+                    </p>
+                )}
+                {error && <p className="text-red-500">{error}</p>}
+            </CardContent>
+        </Card>
     );
 }

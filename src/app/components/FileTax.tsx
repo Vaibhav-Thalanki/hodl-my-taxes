@@ -4,6 +4,16 @@ import React, { useState } from 'react';
 import { getGameTaxSigner } from '@/utils/contract';
 import { publicClient } from '@/utils/viem';
 
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardContent,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+
 export default function FileTax() {
     const [rate, setRate] = useState('10');
     const [deduction, setDeduction] = useState<string>();
@@ -30,29 +40,38 @@ export default function FileTax() {
     };
 
     return (
-        <div className="p-4 border rounded space-y-2">
-            <h2 className="text-lg font-bold">💰 File Tax</h2>
-            <label className="block">
-                Rate (%):
-                <input
-                    type="number"
-                    value={rate}
-                    onChange={e => setRate(e.target.value)}
-                    className="ml-2 w-16 border p-1 rounded"
-                />
-            </label>
-            <button
-                onClick={handleFile}
-                disabled={busy}
-                className="bg-yellow-500 text-white px-3 py-1 rounded"
-            >
-                {busy ? 'Filing…' : 'File Tax'}
-            </button>
-            {deduction != null && (
-                <p className="mt-2 text-green-400">
-                    📄 Tax Deducted: {deduction} WND
-                </p>
-            )}
-        </div>
+        <Card>
+            <CardHeader>
+                <CardTitle>💰 File Tax</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="flex items-center space-x-4">
+                    <Label htmlFor="rate" className="min-w-[4rem]">
+                        Rate (%)
+                    </Label>
+                    <Input
+                        id="rate"
+                        type="number"
+                        value={rate}
+                        onChange={(e) => setRate(e.target.value)}
+                        className="w-20"
+                    />
+                </div>
+
+                <Button
+                    onClick={handleFile}
+                    disabled={busy}
+                    variant="default"
+                >
+                    {busy ? 'Filing…' : 'File Tax'}
+                </Button>
+
+                {deduction && (
+                    <p className="text-green-500">
+                        📄 Tax Deducted: <strong>{deduction} WND</strong>
+                    </p>
+                )}
+            </CardContent>
+        </Card>
     );
 }

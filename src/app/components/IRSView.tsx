@@ -5,6 +5,15 @@ import Link from 'next/link';
 import { getGameTaxContract } from '@/utils/contract';
 import ProofLookup from './ProofLookup';
 
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardContent,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+
 export default function IRSView() {
     const [users, setUsers] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
@@ -14,17 +23,12 @@ export default function IRSView() {
         (async () => {
             try {
                 const ctr = getGameTaxContract();
-                // 1) How many users?
-                const rawCount = await ctr.read.getUserCount({ args: [] });
-                console.log('Raw count:', rawCount);
-                const count = Number(rawCount);
-                console.log('User count:', count);
+                const raw = await ctr.read.getUserCount({ args: [] });
+                const count = Number(raw);
 
-                // 2) Fetch each user
                 const list: string[] = [];
                 for (let i = 0; i < count; i++) {
                     const addr = await ctr.read.getUser({ args: [BigInt(i)] });
-                    console.log(`User[${i}] =`, addr);
                     list.push(addr);
                 }
                 setUsers(list);
@@ -37,35 +41,40 @@ export default function IRSView() {
         })();
     }, []);
 
-    if (loading) {
-        return <p>Loading users…</p>;
-    }
-    if (error) {
-        return <p className="text-red-500">{error}</p>;
-    }
-
     return (
-        <div className="p-4 border rounded space-y-2">
-            <h2 className="text-lg font-bold">🔎 IRS Audit View</h2>
-
-            {users.length === 0 ? (
-                <p>No recorded users yet.</p>
-            ) : (
-                users.map((addr) => (
-                    <div key={addr} className="flex justify-between items-center">
-                        <span className="font-mono">{addr}</span>
-                        <Link
-                            href={`/report/${addr}`}
-                            className="bg-blue-500 text-white px-2 py-1 rounded"
+        <Card>
+            <CardHeader>
+                <CardTitle>🔎 IRS Audit View</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                {loading ? (
+                    <p>Loading users…</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : users.length === 0 ? (
+                    <p>No recorded users yet.</p>
+                ) : (
+                    users.map((addr) => (
+                        <div
+                            key={addr}
+                            className="flex items-center justify-between space-x-4"
                         >
-                            View Report
-                        </Link>
-                    </div>
-                ))
-            )}
+                            <span className="font-mono text-sm">{addr}</span>
+                            <Button
+                                asChild
+                                size="sm"
+                                variant="default"
+                            >
+                                <Link href={`/report/${addr}`}>View Report</Link>
+                            </Button>
+                        </div>
+                    ))
+                )}
 
-            <hr className="my-4" />
-            <ProofLookup />
-        </div>
+                <Separator />
+
+                <ProofLookup />
+            </CardContent>
+        </Card>
     );
 }
