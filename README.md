@@ -1,5 +1,5 @@
 
-# Smart Contracts for Betting Compliance
+# HODL My Taxes: Smart Contracts for Betting Compliance
 A smart contract system for automatic tax withholding and reporting for players, operators, and governments. Transparent. Trustless. Open-source.
 
 
@@ -7,18 +7,16 @@ A smart contract system for automatic tax withholding and reporting for players,
 
 
 ## Full Description
+## Technical Description
 ## Presentation
-## FAQ
+[Canva Presentation](https://www.canva.com/design/DAGlxei1P5Q/pz5BQIsgbs7lS7GoepVVeA/edit?utm_content=DAGlxei1P5Q&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+## Demo
+## Screenshots
+## Smart Contract Overview
+## Walkthrough Video
+## Block Explorer Link
 
-#### Do you intend on supporting more image formats like SVG, Webp in the future?
-
-Yes, our program is designed and structred to allow for extensibility. Adding support for a new image format would require the addition of a new class and little to no modifications in the existing classes.
-
-#### Question 2
-
-Answer 2
-
-
+[Asset Hub Link](https://assethub-westend.subscan.io/account/0xd5621D4D3B08211E6310787Db5A2E1C0CDf544cf)
 ## License
 
 This project is open-source under the MIT License.
