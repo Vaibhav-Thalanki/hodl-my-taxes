@@ -109,6 +109,7 @@ All data is secured and recorded through a custom smart contract on Polkadot Ass
 | `Remix IDE` | Smart Contact writing and deployment to Asset Hub |
 | `Next.js` | Build the user interface (User View + IRS View) |
 | `csv-writer` | Generate CSV files in the browser |
+| `Vercel` |  Application deployment |
 
 ---
 
@@ -122,12 +123,14 @@ All data is secured and recorded through a custom smart contract on Polkadot Ass
 https://github.com/anandms101/viem-dapp/blob/f09a3fe1d53efd9ad85903d6bd81646d189d5d2c/remixContract/TaxBot.sol#L1-L107
 
 ## Demo
+[Live Demo](https://hodl-my-taxes.vercel.app/)
+
 ## Screenshots
 
 ![Remix Deployment to Polkadot Westend Asset Hub](https://github.com/user-attachments/assets/34a939bb-8941-4d4c-a424-08325ada2ff7)
 
 
-*(Screenshots coming soon)*
+
 ## Smart Contract & Application Overview
 ![Smart Contract Overview](https://github.com/anandms101/viem-dapp/blob/9384958f20e6653a2587f177dbeea3b2b576559f/HODLTaxes.png "Smart Contract Overview")
 
