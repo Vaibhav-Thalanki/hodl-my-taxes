@@ -14,12 +14,28 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
+/**
+ * ProofLookup Component
+ * 
+ * A React component that allows users to look up ownership information
+ * using proof metadata. It displays the owner's address if found or
+ * shows appropriate error messages.
+ */
 export default function ProofLookup() {
+    /** Stores the proof metadata input by the user */
     const [proof, setProof] = useState('');
+    /** Stores the owner's address once found */
     const [owner, setOwner] = useState<string | null>(null);
+    /** Stores error messages if lookup fails */
     const [error, setError] = useState<string | null>(null);
+    /** Indicates if a lookup operation is in progress */
     const [busy, setBusy] = useState(false);
 
+    /**
+     * Performs the proof ownership lookup
+     * Queries the smart contract to find the owner of the provided proof
+     * Updates the UI state based on the response
+     */
     const lookup = async () => {
         setBusy(true);
         setError(null);
@@ -45,7 +61,6 @@ export default function ProofLookup() {
                 <CardTitle>🔑 Lookup by Proof Code</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-                {/* input + button */}
                 <div className="flex space-x-2">
                     <Input
                         placeholder="Enter proof metadata"
@@ -65,7 +80,6 @@ export default function ProofLookup() {
 
                 <Separator />
 
-                {/* Results */}
                 {owner && (
                     <p className="flex items-center space-x-2">
                         <span>Found user:</span>

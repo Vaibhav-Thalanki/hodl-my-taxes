@@ -12,20 +12,31 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+/**
+ * IssueTaxProof Component
+ * 
+ * A React component that allows users to issue tax proofs using a smart contract.
+ * Displays a card with a button to trigger the proof issuance and shows the result
+ * or any errors that occur during the process.
+ */
 export default function IssueTaxProof() {
   const [busy, setBusy] = useState(false);
   const [proofKey, setProofKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * Handles the issuance of a tax proof by generating a unique key and
+   * interacting with the smart contract.
+   * Sets the proofKey on success or displays an error message on failure.
+   */
   const handleProofOnly = async () => {
     setBusy(true);
     setError(null);
 
     try {
       const ctr = await getGameTaxSigner();
-      const key = uuidv4(); // unique proof key
+      const key = uuidv4();
 
-      // only issue proof — no transaction recorded
       await ctr.write.issueTaxProof({ args: [key] });
 
       setProofKey(key);

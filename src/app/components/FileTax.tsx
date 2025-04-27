@@ -14,11 +14,28 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
+/**
+ * FileTax Component
+ * 
+ * A React component that allows users to file tax transactions on the blockchain.
+ * Users can specify a tax rate percentage and submit the transaction.
+ * The component displays the deducted tax amount after successful submission.
+ * 
+ * @component
+ * @returns {JSX.Element} A card interface for filing tax transactions
+ */
 export default function FileTax() {
     const [rate, setRate] = useState('10');
     const [deduction, setDeduction] = useState<string>();
     const [busy, setBusy] = useState(false);
 
+    /**
+     * Handles the tax filing process
+     * Submits the tax rate to the blockchain and retrieves the deducted amount
+     * 
+     * @async
+     * @throws {Error} When the tax filing transaction fails
+     */
     const handleFile = async () => {
         setBusy(true);
         try {

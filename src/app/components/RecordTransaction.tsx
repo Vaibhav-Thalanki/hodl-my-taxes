@@ -21,20 +21,36 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 
-// Mirror the Solidity enum:
+/**
+ * Represents the different types of transaction categories
+ * with their corresponding tax implications
+ */
 enum Category {
   Income = 0,
   Expense = 1,
   CapitalGain = 2,
 }
 
-// Fixed tax rates per category
+/**
+ * Tax rates mapping for each transaction category
+ * Income: 30%, Expense: 0%, Capital Gain: 20%
+ */
 const TAX_RATES: Record<Category, number> = {
   [Category.Income]: 30,
   [Category.Expense]: 0,
   [Category.CapitalGain]: 20,
 };
 
+/**
+ * RecordTransaction component allows users to record in-game transactions
+ * with automatic tax calculations based on the transaction category.
+ * 
+ * Features:
+ * - Category selection (Income, Expense, Capital Gain)
+ * - Item ID input
+ * - Price input with automatic tax calculation
+ * - Blockchain transaction recording with proof generation
+ */
 export default function RecordTransaction() {
   const [category, setCategory] = useState<Category>(Category.Income);
   const [itemId, setItemId] = useState('');

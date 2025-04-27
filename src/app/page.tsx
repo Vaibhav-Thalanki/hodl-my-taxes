@@ -1,5 +1,13 @@
 'use client';
 
+/**
+ * Main application component that provides both user and IRS interfaces for tax management.
+ * Features include wallet connection, transaction recording, tax reporting, and proof of filing.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered Home component
+ */
+
 import React, { useState } from 'react';
 import WalletConnect from './components/WalletConnect';
 import RecordTransaction from './components/RecordTransaction';
@@ -21,9 +29,7 @@ export default function Home() {
 
   return (
     <main className="p-8 flex justify-center">
-      {/* Centered container with max width */}
       <div className="w-full max-w-4xl space-y-6">
-        {/* Header */}
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold m-0">🧾 HODL My Taxes</h1>
@@ -39,28 +45,23 @@ export default function Home() {
           </div>
         </Card>
 
-        {/* Conditional content */}
         {mode === 'user' ? (
           <div className="space-y-4">
-            {/* Connect Wallet */}
             <Card>
               <CardHeader><CardTitle>Connect Wallet</CardTitle></CardHeader>
               <CardContent><WalletConnect onConnect={() => { }} /></CardContent>
             </Card>
 
-            {/* Record Transaction */}
             <Card>
               <CardHeader><CardTitle>Record Transaction</CardTitle></CardHeader>
               <CardContent><RecordTransaction /></CardContent>
             </Card>
 
-            {/* Tax Report */}
             <Card>
               <CardHeader><CardTitle>Visualize & Download CSV</CardTitle></CardHeader>
               <CardContent><TaxReport /></CardContent>
             </Card>
 
-            {/* Issue Proof */}
             <Card>
               <CardHeader><CardTitle>Issue Proof of Filing</CardTitle></CardHeader>
               <CardContent><IssueTaxProof /></CardContent>

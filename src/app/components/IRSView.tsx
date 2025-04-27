@@ -1,5 +1,9 @@
 'use client';
 
+/**
+ * @fileoverview IRS View component for auditing user reports and verifying proofs
+ */
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getGameTaxContract } from '@/utils/contract';
@@ -14,9 +18,18 @@ import {
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
+/**
+ * IRSView Component
+ * Displays a list of registered users and provides access to their tax reports
+ * Also includes functionality to lookup and verify zero-knowledge proofs
+ * @returns {JSX.Element} The rendered IRS view component
+ */
 export default function IRSView() {
+    /** Array of user addresses */
     const [users, setUsers] = useState<string[]>([]);
+    /** Loading state for user data fetching */
     const [loading, setLoading] = useState(true);
+    /** Error state for handling fetch failures */
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
