@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { publicClient, getWalletClient } from '@/utils/viem';
 import { getGameTaxSigner } from '@/utils/contract';
-import { publicClient } from '@/utils/viem';
 
 import {
     Card,
@@ -13,28 +13,34 @@ import {
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from '@/components/ui/dialog';
 
 /**
  * FileTax Component
- * 
- * A React component that allows users to file tax transactions on the blockchain.
- * Users can specify a tax rate percentage and submit the transaction.
- * The component displays the deducted tax amount after successful submission.
- * 
- * @component
- * @returns {JSX.Element} A card interface for filing tax transactions
+ * Allows users to file taxes by specifying a tax rate and displays the deducted amount.
+ * Handles blockchain interactions for tax filing through a smart contract.
  */
 export default function FileTax() {
+    /** Tax rate percentage, defaults to 10% */
     const [rate, setRate] = useState('10');
+    /** Amount deducted after tax filing */
     const [deduction, setDeduction] = useState<string>();
+    /** Loading state during transaction processing */
     const [busy, setBusy] = useState(false);
+    /** Stores error message if transaction fails */
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     /**
      * Handles the tax filing process
-     * Submits the tax rate to the blockchain and retrieves the deducted amount
-     * 
-     * @async
-     * @throws {Error} When the tax filing transaction fails
+     * 1. Calls the smart contract's fileTax function with the specified rate
+     * 2. Waits for transaction confirmation
+     * 3. Retrieves and displays the tax deduction amount
      */
     const handleFile = async () => {
         setBusy(true);
@@ -50,45 +56,62 @@ export default function FileTax() {
             setDeduction(taxAmount.toString());
         } catch (e: any) {
             console.error('fileTax error', e);
-            alert('Failed to file tax: ' + (e.message || e));
+            setErrorMsg('Failed to file tax: ' + (e.message || e));
         } finally {
             setBusy(false);
         }
     };
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>💰 File Tax</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="flex items-center space-x-4">
-                    <Label htmlFor="rate" className="min-w-[4rem]">
-                        Rate (%)
-                    </Label>
-                    <Input
-                        id="rate"
-                        type="number"
-                        value={rate}
-                        onChange={(e) => setRate(e.target.value)}
-                        className="w-20"
-                    />
-                </div>
+        <>
+            <Card>
+                <CardHeader>
+                    <CardTitle>💰 File Tax</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <div className="flex items-center space-x-4">
+                        <Label htmlFor="rate" className="min-w-[4rem]">
+                            Rate (%)
+                        </Label>
+                        <Input
+                            id="rate"
+                            type="number"
+                            value={rate}
+                            onChange={(e) => setRate(e.target.value)}
+                            className="w-20"
+                        />
+                    </div>
 
-                <Button
-                    onClick={handleFile}
-                    disabled={busy}
-                    variant="default"
-                >
-                    {busy ? 'Filing…' : 'File Tax'}
-                </Button>
+                    <Button
+                        onClick={handleFile}
+                        disabled={busy}
+                        variant="default"
+                    >
+                        {busy ? 'Filing…' : 'File Tax'}
+                    </Button>
 
-                {deduction && (
-                    <p className="text-green-500">
-                        📄 Tax Deducted: <strong>{deduction} WND</strong>
-                    </p>
-                )}
-            </CardContent>
-        </Card>
+                    {deduction && (
+                        <p className="text-green-500">
+                            📄 Tax Deducted: <strong>{deduction} WND</strong>
+                        </p>
+                    )}
+                </CardContent>
+            </Card>
+
+            {/* Error Dialog */}
+            <Dialog open={!!errorMsg} onOpenChange={(open) => !open && setErrorMsg(null)}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>⚠️ Error</DialogTitle>
+                    </DialogHeader>
+                    <div className="py-2">
+                        <p className="text-sm">{errorMsg}</p>
+                    </div>
+                    <DialogFooter>
+                        <Button onClick={() => setErrorMsg(null)}>OK</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </>
     );
 }
