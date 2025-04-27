@@ -14,6 +14,9 @@ contract GameTax {
     // New: map proof metadata → who issued it
     mapping(string => address) private _proofOwners;
 
+    // New storage for the last‐filed tax amount
+    mapping(address => uint256) private _taxDeducted;
+
     event TransactionRecorded(
         address indexed who,
         Category category,
@@ -21,6 +24,9 @@ contract GameTax {
         uint256 price,
         uint256 timestamp
     );
+
+    event TaxDeducted(address indexed who, uint256 amount);
+
     event TaxProofIssued(address indexed who, string metadata);
 
     constructor() {
@@ -77,5 +83,24 @@ contract GameTax {
         returns (address)
     {
         return _proofOwners[metadata];
+    }
+
+        /// @notice Calculates tax at `ratePercent`% over all Income txs
+    function fileTax(uint256 ratePercent) external {
+        Tx[] storage txs = _txs[msg.sender];
+        uint256 sumIncome;
+        for (uint256 i = 0; i < txs.length; i++) {
+            if (txs[i].category == Category.Income) {
+                sumIncome += txs[i].price;
+            }
+        }
+        uint256 tax = (sumIncome * ratePercent) / 100;
+        _taxDeducted[msg.sender] = tax;
+        emit TaxDeducted(msg.sender, tax);
+    }
+
+    /// @notice Read back the last‐filed tax amount for any user
+    function getTaxDeduction(address who) external view returns (uint256) {
+        return _taxDeducted[who];
     }
 }
