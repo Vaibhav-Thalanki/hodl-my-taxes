@@ -120,14 +120,18 @@ All data is secured and recorded through a custom smart contract on Polkadot Ass
 [View our Canva Presentation](https://www.canva.com/design/DAGlxei1P5Q/pz5BQIsgbs7lS7GoepVVeA/edit?utm_content=DAGlxei1P5Q&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Custom Smart Contract
-https://github.com/anandms101/viem-dapp/blob/f09a3fe1d53efd9ad85903d6bd81646d189d5d2c/remixContract/TaxBot.sol#L1-L107
+https://github.com/anandms101/hodl-my-taxes/blob/7fe6fc477c64c091da9c8c594c40351e3e45ff29/remixContract/TaxBot.sol#L1-L107
 
 ## Demo
-[Live Demo](https://hodl-my-taxes.vercel.app/)
+[Live Deployed Demo](https://hodl-my-taxes.vercel.app/)
 
-Demo video:
+[Demo video](https://github.com/anandms101/hodl-my-taxes/blob/de7b97d6fed216165732220fba5b4345e23623c6/HODLmyTaxesDemoVideo.mov
+)
+<p align="center">
+  <img src="walkthrough.gif" />
+</p>
 
-https://github.com/anandms101/hodl-my-taxes/blob/de7b97d6fed216165732220fba5b4345e23623c6/HODLmyTaxesDemoVideo.mov
+
 
 
 ## Screenshots
